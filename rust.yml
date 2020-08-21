@@ -1,0 +1,36 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo test --verbose
+      
+- name: Setup Node.js environment
+  uses: actions/setup-node@v1.4.3
+  with:
+    # Set always-auth in npmrc
+    always-auth: # optional, default is false
+    # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
+    node-version: # optional, default is 10.x
+    # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, and set up auth to read in from env.NODE_AUTH_TOKEN
+    registry-url: # optional
+    # Optional scope for authenticating against scoped registries
+    scope: # optional
+    # Deprecated. Use node-version instead. Will not be supported after October 1, 2019
+    version: # optional
